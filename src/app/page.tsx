@@ -1,8 +1,10 @@
+import { Header } from "@/components/layout/header";
+
 export default async function Page() {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the main landing page of the application.</p>
+      <Header />
+      <main className="container mx-auto mb-10">...</main>
     </div>
   );
 }
