@@ -6,20 +6,27 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowLeft } from "lucide-react";
 import { LoginAreaStepEmail } from "./login-area-step-email";
+import { LoginAreaStepSignup } from "./login-area-step-signup";
+import { getCookie } from "cookies-next/client";
 
-type Steps = "EMAIL" | "SINGUP" | "SINGIN";
+type Steps = "EMAIL" | "SIGNUP" | "SINGIN";
 
 export const LoginAreaDialog = () => {
   const auth = useAuth();
   const [step, setStep] = useState<Steps>("EMAIL");
   const [emailField, setEmailField] = useState("");
 
+  useEffect(() => {
+    const token = getCookie("token");
+    if (token) auth.setToken(token);
+  }, []);
+
   const handleSetpEmail = (hasEmail: boolean, email: string) => {
     setEmailField(email);
     if (hasEmail) {
       setStep("SINGIN");
     } else {
-      setStep("SINGUP");
+      setStep("SIGNUP");
     }
   };
 
@@ -39,7 +46,7 @@ export const LoginAreaDialog = () => {
             )}
 
             {step === "EMAIL" && "Login / Cadastro"}
-            {step === "SINGUP" && "Cadastro"}
+            {step === "SIGNUP" && "Cadastro"}
             {step === "SINGIN" && "Login"}
           </DialogTitle>
         </DialogHeader>
@@ -48,7 +55,7 @@ export const LoginAreaDialog = () => {
             <LoginAreaStepEmail onValidate={handleSetpEmail} />
           )}
           {step === "SINGIN" && <div>Login </div>}
-          {step === "SINGUP" && <div>Cadastro </div>}
+          {step === "SIGNUP" && <LoginAreaStepSignup email={emailField} />}
         </div>
       </DialogContent>
     </Dialog>
