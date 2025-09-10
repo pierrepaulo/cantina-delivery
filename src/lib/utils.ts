@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const decimaToMoney = (price: string | number | Prisma.Decimal) => {
+export const decimalToMoney = (price: string | number | Prisma.Decimal) => {
   return parseFloat(price.toString()).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
