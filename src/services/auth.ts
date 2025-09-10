@@ -20,7 +20,7 @@ export const validadeAuth = async (email: string, password: string) => {
     email: user.email,
   };
 };
-export const createuser = async (
+export const createUser = async (
   name: string,
   email: string,
   password: string
