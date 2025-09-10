@@ -8,7 +8,7 @@ export const hasEmail = async (email: string) => {
   });
   return user ? true : false;
 };
-export const validadeAuth = async (email: string, password: string) => {
+export const validateAuth = async (email: string, password: string) => {
   const user = await prisma.user.findUnique({
     where: { email },
   });
