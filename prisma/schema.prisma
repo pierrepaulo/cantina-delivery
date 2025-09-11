@@ -20,7 +20,7 @@ model Product {
   image         String @default("default.jpg")
   price         Decimal @db.Money()
   ingredients   String?
-  oderProducts  OrderProduct[]
+  orderProducts  OrderProduct[]
 }
 
 model User {
@@ -39,14 +39,16 @@ model Order {
   updatedAt DateTime?
   obs       String?
   status    OrderStatus  @default(INITIALIZED)
+  subtotal  Decimal
   user      User         @relation("UserOrders", fields: [userId], references: [id])
-  oderProducts OrderProduct[]
+  orderProducts OrderProduct[]
 }
 
 model OrderProduct {
   id        Int     @id @default(autoincrement())
   orderId   Int
   productId Int
+  price     Decimal
   quantity  Int     @default(1)
   order     Order   @relation(fields: [orderId], references: [id])
   product   Product @relation(fields: [productId], references: [id])
